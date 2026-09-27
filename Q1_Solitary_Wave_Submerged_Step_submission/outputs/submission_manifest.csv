@@ -1,0 +1,56 @@
+file_name,description,source_case,units
+Allrun,automation script,formal case,n/a
+Allclean,automation script,formal case,n/a
+case\system\blockMeshDict,OpenFOAM controls,formal OpenFOAM run,n/a
+case\system\controlDict,OpenFOAM controls,formal OpenFOAM run,n/a
+case\system\decomposeParDict,OpenFOAM controls,formal OpenFOAM run,n/a
+case\system\fvSchemes,OpenFOAM controls,formal OpenFOAM run,n/a
+case\system\fvSolution,OpenFOAM controls,formal OpenFOAM run,n/a
+case\system\setExprFieldsDict,OpenFOAM controls,formal OpenFOAM run,n/a
+case\constant\g,mesh and physical properties,formal OpenFOAM run,n/a
+case\constant\polyMesh\boundary,mesh and physical properties,formal OpenFOAM run,n/a
+case\constant\polyMesh\faces,mesh and physical properties,formal OpenFOAM run,n/a
+case\constant\polyMesh\neighbour,mesh and physical properties,formal OpenFOAM run,n/a
+case\constant\polyMesh\owner,mesh and physical properties,formal OpenFOAM run,n/a
+case\constant\polyMesh\points,mesh and physical properties,formal OpenFOAM run,n/a
+case\constant\polyMesh\sets\twoInternalFacesCells,mesh and physical properties,formal OpenFOAM run,n/a
+case\constant\transportProperties,mesh and physical properties,formal OpenFOAM run,n/a
+case\constant\turbulenceProperties,mesh and physical properties,formal OpenFOAM run,n/a
+case\constant\waveProperties,mesh and physical properties,formal OpenFOAM run,n/a
+case\0\alpha.water,initialized fields,formal OpenFOAM run,n/a
+case\0\p_rgh,initialized fields,formal OpenFOAM run,n/a
+case\0\U,initialized fields,formal OpenFOAM run,n/a
+case\14\alpha.water,reconstructed restart fields,formal OpenFOAM run,n/a
+case\14\alpha.water_0,reconstructed restart fields,formal OpenFOAM run,n/a
+case\14\alphaPhi0.water,reconstructed restart fields,formal OpenFOAM run,n/a
+case\14\p,reconstructed restart fields,formal OpenFOAM run,n/a
+case\14\p_rgh,reconstructed restart fields,formal OpenFOAM run,n/a
+case\14\phi,reconstructed restart fields,formal OpenFOAM run,n/a
+case\14\U,reconstructed restart fields,formal OpenFOAM run,n/a
+case\14\uniform\cumulativeContErr,reconstructed restart fields,formal OpenFOAM run,n/a
+case\14\uniform\functionObjects\functionObjectProperties,reconstructed restart fields,formal OpenFOAM run,n/a
+case\14\uniform\time,reconstructed restart fields,formal OpenFOAM run,n/a
+case\14\uniform\waveProperties.inlet,reconstructed restart fields,formal OpenFOAM run,n/a
+case\14\uniform\waveProperties.outlet,reconstructed restart fields,formal OpenFOAM run,n/a
+scripts\build_report.py,generation and QA scripts,formal OpenFOAM run,n/a
+scripts\extract_outputs.py,generation and QA scripts,formal OpenFOAM run,n/a
+scripts\generate_control_dict.py,generation and QA scripts,formal OpenFOAM run,n/a
+scripts\make_plots.py,generation and QA scripts,formal OpenFOAM run,n/a
+scripts\verify_submission.py,generation and QA scripts,formal OpenFOAM run,n/a
+logs\log.blockMesh,formal run evidence,formal OpenFOAM run,n/a
+logs\log.checkMesh,formal run evidence,formal OpenFOAM run,n/a
+logs\log.decomposePar,formal run evidence,formal OpenFOAM run,n/a
+logs\log.environment,formal run evidence,formal OpenFOAM run,n/a
+logs\log.reconstructPar,formal run evidence,formal OpenFOAM run,n/a
+logs\log.setExprFields,formal run evidence,formal OpenFOAM run,n/a
+logs\log.solver,formal run evidence,formal OpenFOAM run,n/a
+logs\log.verification,formal run evidence,formal OpenFOAM run,n/a
+outputs\mesh.png,derived deliverables,formal OpenFOAM run,n/a
+outputs\mesh_statistics.csv,derived deliverables,formal OpenFOAM run,SI
+outputs\report.md,derived deliverables,formal OpenFOAM run,n/a
+outputs\result_01.png,derived deliverables,formal OpenFOAM run,n/a
+outputs\run_summary.csv,derived deliverables,formal OpenFOAM run,SI
+outputs\solver_time_history.csv,derived deliverables,formal OpenFOAM run,SI
+outputs\surface_profiles.csv,derived deliverables,formal OpenFOAM run,SI
+outputs\water_area.csv,derived deliverables,formal OpenFOAM run,SI
+outputs\wave_gauges.csv,derived deliverables,formal OpenFOAM run,SI

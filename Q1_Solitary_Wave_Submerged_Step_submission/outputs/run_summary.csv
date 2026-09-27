@@ -1,0 +1,2 @@
+case_id,run_id,openfoam_version,solver_name,parallel_processes,cell_count,physical_time_end_s,max_courant_observed,output_interval_s,start_time_utc,end_time_utc
+Q1_Solitary_Wave_Submerged_Step,formal_20260903092306,v2606,interFoam,16,112000,14.00000000,7.380967572000e-01,1.0,2026-09-03T09:23:06Z,2026-09-03T09:56:55Z

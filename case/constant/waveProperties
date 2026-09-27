@@ -1,0 +1,21 @@
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      waveProperties;
+}
+
+inlet
+{
+    alpha           alpha.water;
+    waveModel       shallowWaterAbsorption;
+    nPaddle         1;
+}
+
+outlet
+{
+    alpha           alpha.water;
+    waveModel       shallowWaterAbsorption;
+    nPaddle         1;
+}
+

@@ -1,0 +1,2 @@
+domain_x_min_m,domain_x_max_m,domain_height_m,water_depth_m,step_front_x_m,step_rear_x_m,step_height_m,solitary_wave_height_m,gravity_m_s2,water_density_kg_m3,water_kinematic_viscosity_m2_s,air_density_kg_m3,air_kinematic_viscosity_m2_s,surface_tension_N_m,initial_wave_center_x_m,minimum_end_time_s,max_cells
+0.0,14.2,0.25,0.1,7.0,8.0,0.05,0.009,9.81,998.2,1.004e-06,1.204,1.5e-05,0.072,2.8,14.0,120000

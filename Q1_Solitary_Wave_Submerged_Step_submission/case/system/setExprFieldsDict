@@ -1,0 +1,43 @@
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      setExprFieldsDict;
+}
+
+expressions
+(
+    alphaWaterInitial
+    {
+        field       alpha.water;
+        variables
+        (
+            "q = 2.598076211*(pos().x() - 2.8)"
+            "eta = 0.009/sqr(cosh(q))"
+        );
+        expression
+        #{
+            min(max(0.5 + (0.1 + eta - pos().z())/0.0025, 0), 1)
+        #};
+    }
+
+    solitaryVelocity
+    {
+        field       U;
+        variables
+        (
+            "q = 2.598076211*(pos().x() - 2.8)"
+            "eta = 0.009/sqr(cosh(q))"
+            "uSol = 1.034064795*eta/(0.1 + eta)"
+            "wSol = pos().z()*2*2.598076211*1.034064795*0.1*eta*tanh(q)/sqr(0.1 + eta)"
+        );
+        fieldMask
+        #{
+            pos().z() < (0.1 + eta)
+        #};
+        expression
+        #{
+            uSol*vector(1,0,0) + wSol*vector(0,0,1)
+        #};
+    }
+);

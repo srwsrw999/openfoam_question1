@@ -1,0 +1,62 @@
+#!/bin/bash
+cd "$(dirname "$0")"
+
+if [ -z "${WM_PROJECT_DIR:-}" ]; then
+    if [ -f /usr/lib/openfoam/openfoam2606/etc/bashrc ]; then
+        source /usr/lib/openfoam/openfoam2606/etc/bashrc
+    else
+        echo "OpenFOAM v2606 environment not found" >&2
+        exit 2
+    fi
+fi
+set -euo pipefail
+
+find case -mindepth 1 -maxdepth 1 -type d -regextype posix-extended \
+    -regex 'case/[0-9]+([.][0-9]+)?' -exec rm -rf -- {} +
+rm -rf case/processor* case/postProcessing logs outputs
+mkdir -p logs outputs
+cp -r case/0.orig case/0
+python3 scripts/generate_control_dict.py
+
+RUN_START_UTC=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+{
+    echo "run_start_utc=$RUN_START_UTC"
+    echo "host=$(hostname)"
+    echo "working_directory=$(pwd)"
+    echo "foam_version=${WM_PROJECT_VERSION:-unknown}"
+    echo "WM_PROJECT_VERSION=${WM_PROJECT_VERSION:-unknown}"
+    echo "WM_OPTIONS=${WM_OPTIONS:-unknown}"
+    echo "mpi=$(mpirun --version 2>&1 | head -1)"
+    echo "python=$(python3 --version 2>&1)"
+    uname -a
+    lscpu
+} > logs/log.environment
+
+(cd case && blockMesh) > logs/log.blockMesh 2>&1
+(cd case && checkMesh -allGeometry -allTopology) > logs/log.checkMesh 2>&1
+(cd case && setExprFields -keepPatches) > logs/log.setExprFields 2>&1
+(cd case && decomposePar -force) > logs/log.decomposePar 2>&1
+
+set +e
+(cd case && mpirun -np 16 interFoam -parallel) > logs/log.solver 2>&1
+SOLVER_RC=$?
+set -e
+if [ "$SOLVER_RC" -ne 0 ]; then
+    echo "Formal solver failed with exit code $SOLVER_RC" >&2
+    exit "$SOLVER_RC"
+fi
+
+(cd case && reconstructPar -latestTime) > logs/log.reconstructPar 2>&1
+RUN_END_UTC=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+{
+    echo "run_end_utc=$RUN_END_UTC"
+} >> logs/log.environment
+
+python3 scripts/extract_outputs.py
+if ! python3 -c 'import matplotlib' >/dev/null 2>&1; then
+    python3 -m pip install --user --break-system-packages --disable-pip-version-check matplotlib \
+        > logs/log.python_dependencies 2>&1
+fi
+python3 scripts/make_plots.py
+python3 scripts/build_report.py
+python3 scripts/verify_submission.py | tee logs/log.verification

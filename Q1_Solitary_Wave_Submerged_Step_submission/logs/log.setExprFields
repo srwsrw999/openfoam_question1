@@ -1,0 +1,63 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2606                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _481094f-20260618 OPENFOAM=2606 version=2606
+Arch   : "LSB;label=32;scalar=64"
+Exec   : setExprFields -keepPatches
+Date   : Sep 03 2026
+Time   : 17:23:08
+Host   : Evalset-shunan
+PID    : 4071124
+I/O    : uncollated
+Case   : /home/shunan/workspace/Q1_Solitary_Wave_Submerged_Step/case
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+memory pool : not available
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+
+--> FOAM Warning : allowSystemOperations : Allowing user-supplied system call operations.
+                   This can be a security risk if running untrusted cases
+                   through e.g. 'coded' on-the-fly-compilation functionality.
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+
+Time = 0
+Modify field: alpha.water (type: volScalarField) time=0
+Expression:
+>>>>
+
+            min(max(0.5 + (0.1 + eta - pos().z())/0.0025, 0), 1)
+        
+<<<<
+
+Dispatch ... volScalarField
+setField(alpha.water): volScalarField
+Set all 112000 values
+Writing to alpha.water
+Modify field: U (type: volVectorField) time=0
+Expression:
+>>>>
+
+            uSol*vector(1,0,0) + wSol*vector(0,0,1)
+        
+<<<<
+field-mask:
+>>>>
+pos().z() < (0.1 + eta)
+<<<<
+
+Dispatch ... volVectorField
+setField(U): volVectorField
+Set 44052 of 112000 values
+Writing to U
+
+End
+
